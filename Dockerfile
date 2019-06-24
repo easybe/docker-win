@@ -7,6 +7,7 @@ COPY sshd_config C:/ProgramData/ssh/sshd_config
 COPY add_user.ps1 C:/Windows/Temp/add_user.ps1
 
 RUN Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1')); \
+    choco install -y git; \
     [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; \
     Invoke-WebRequest $('https://github.com/ticketmaster/spinner/releases/download/v{0}/spinner_windows_amd64-v{0}.zip' -f $Env:SPINNER_VERSION) -OutFile spinner.zip -UseBasicParsing; \
     Expand-Archive spinner.zip; \
